@@ -1,11 +1,11 @@
 # 🚀 Bem-vindos ao Repositório de Soluções de Programação Competitiva! 🚀
 
-Neste espaço, você encontrará as soluções detalhadas e comentadas para os exercícios desafiadores dos roteiros de treinamento de Programação Competitiva. Este repositório é o seu guia para compreender como abordar problemas complexos, otimizar algoritmos e explorar estratégias criativas de resolução.
+Neste espaço, você encontrará as soluções detalhadas e comentadas, com ajuda da inteligência artificial, para os exercícios desafiadores dos roteiros de treinamento de Programação Competitiva. Este repositório é o seu guia para compreender como abordar problemas complexos, otimizar algoritmos e explorar estratégias criativas de resolução.
 
 ## 💡 O que você encontrará aqui:
 
 - Soluções dos exercícios em C++.
-- Comentários detalhados que explicam a lógica por trás de cada solução.
+- Comentários detalhados (feitos com a ajuda do ChatGPT) que explicam a lógica por trás de cada solução.
 - Dicas e técnicas para abordar problemas variados em competições de programação.
 
 ## 📂 Organização do Repositório:
