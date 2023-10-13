@@ -53,30 +53,20 @@ int main(){
     long n;
     while(cin >> n){
         long valor = n;
-        string extenso = "";
-        //decompor número em unidades
-//        cout << "VALOR: " << valor << endl;
+        string extenso = ""; //começar o número por extenso vazio
+        //decompor o número
         int centenaMilhar = valor/100000;
-//        cout << centenaMilhar << endl;
         valor = valor - (centenaMilhar * 100000);
-//        cout << "VALOR: " << valor << endl;
         int dezenaMilhar = valor/10000;
-//        cout << dezenaMilhar << endl;
         valor = valor - (dezenaMilhar * 10000);
-//        cout << "VALOR: " << valor << endl;
         int unidadeMilhar = valor/1000;
-//        cout << unidadeMilhar << endl;
         valor = valor - (unidadeMilhar*1000);
-//        cout << "VALOR: " << valor << endl;
         int centena = valor/100;
-//        cout << centena << endl;
         valor = valor - (centena*100);
-//        cout << "VALOR: " << valor << endl;
         int dezena = valor/10;
-//        cout << dezena << endl;
         valor = valor - (dezena*10);
-//        cout << "VALOR: " << valor << endl;
 
+        //escrever o número
         if(n==100000){
             extenso = "cem mil" ;
         } else if(n==10000) {
@@ -85,80 +75,53 @@ int main(){
             extenso =  "mil" ;
         } else if(n==100) {
             extenso = "cem" ;
+        } else if(n==0) {
+            extenso = "zero";
         } else {
+            //escreve se o número tiver casa de centena de milhar
             if(centenaMilhar>0){
-                extenso = centenas[centenaMilhar-1];
-                if(dezenaMilhar>0 || unidadeMilhar>0){
-                    if(dezenaMilhar>1){
-                        extenso += " e " + dezenas[dezenaMilhar-2];
-                        if(unidadeMilhar>0){
-                            extenso+= " e " + numeros[unidadeMilhar] + " mil";
-                        } else {
-                            extenso+=" mil";
-                        }
-                    } else if(dezenaMilhar==0){
-                        if(unidadeMilhar>0){
-                            extenso+=" e "+numeros[unidadeMilhar]+" mil";
-                        } else {
-                            extenso+=" mil";
-                        }
-                    } else if(dezenaMilhar==1){
-                        extenso+=" e "+dezAteDezenove[unidadeMilhar]+" mil";
-                    }
-                } else {
-                    extenso+=" mil";
-                }
-                if(centena>0||dezena>0||valor>0) extenso+=" ";
+                if(centenaMilhar==1&&dezenaMilhar==0&&unidadeMilhar==0) extenso="cem";
+                else extenso = centenas[centenaMilhar-1];
             }
+            //verifica se tem dezena de milhar e escreve
+            if(dezenaMilhar==1){
+                if(extenso.length()>0) extenso+=" e "+dezAteDezenove[unidadeMilhar];
+                else extenso = dezAteDezenove[unidadeMilhar];
+            } else if(dezenaMilhar>1){
+                if(extenso.length()>0) extenso+=" e "+dezenas[dezenaMilhar-2];
+                else extenso = dezenas[dezenaMilhar-2];
+            }
+            //verifica se tem unidade de milhar e escreve
+            if (unidadeMilhar>0&&dezenaMilhar!=1){
+                if(extenso.length()==0 && unidadeMilhar==1) extenso+="mil";
+                else if(extenso.length()>0) extenso+= " e " + numeros[unidadeMilhar];
+                else extenso = numeros[unidadeMilhar];
+            }
+
+            if(!equal(extenso.begin(), extenso.end(),"mil")&&extenso.length()>0) extenso+=" mil"; //se tiver alguma coisa inclui a palavra mil
+
             if(centena>0){
-                extenso+=centenas[centena-1];
+                if(centena==1&&dezena==0&&valor==0){
+                    if(extenso.length()>0) extenso+=" e cem";
+                    else extenso+="cem";
+                } else if (extenso.length() > 0){
+                    if(dezena==0&&valor==0) extenso += " e " + centenas[centena-1];
+                    else extenso += " " + centenas[centena-1];
+                } else extenso+=centenas[centena-1];
             }
-            if(dezena>1){
+            if(dezena == 1) {
+                if (extenso.length() > 0) extenso += " e " + dezAteDezenove[valor];
+                else extenso += dezAteDezenove[valor];
+            } else if (dezena > 1){
                 if(extenso.length()>0)extenso+=" e "+dezenas[dezena-2];
                 else extenso+=dezenas[dezena-2];
-                if(valor>0){
-                    extenso+=" e "+numeros[valor] ;
-                }
-            } else if(dezena == 1){
-                if(extenso.length()>0)extenso+=" e "+dezAteDezenove[valor];
-                else extenso+=dezAteDezenove[valor];
-            } else if(dezena==0){
-                if(n<=9) cout << numeros[n] ;
-                else{
-                    if(extenso.length()>0)extenso+=" e "+numeros[valor];
-                }
+            }
+            if(valor>0&&dezena!=1) {
+                if(extenso.length()>0)extenso+=" e "+numeros[valor];
+                else extenso+=numeros[valor];
             }
         }
 
         cout << extenso << endl;
-
-
-//        if(valor==100000){
-//            cout << "cem mil" << endl;
-//        }else if(valor>=101&&valor<1000) {
-//            cout << centenas[(valor / 100) - 1];
-//            if (valor%100 != 0) {
-//                valor = valor - (valor / 100 * 100);
-//                cout << " e ";
-//            } else {
-//                cout << endl;
-//            }
-//        }
-//        if(valor==100){
-//            cout << "cem" << endl;
-//        }
-//        else if(valor<10){
-//            cout << numeros[valor] << endl;
-//        }
-//        else if(valor>=10&&valor<20)
-//            cout << dezAteDezenove[valor%10] << endl;
-//        else if(valor>=20&&valor<100){
-//            cout << dezenas[(valor/10)-2];
-//            if(valor%10!=0){
-//                cout << " e " << numeros[valor%10] << endl;
-//            } else {
-//                cout << endl;
-//            }
-//        }
     }
 }
