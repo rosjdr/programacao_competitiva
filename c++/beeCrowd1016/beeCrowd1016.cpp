@@ -1,3 +1,7 @@
-//
-// Created by Diretor on 16/10/2023.
-//
+#include "bits/stdc++.h"
+using namespace std;
+int main(){
+    int k;
+    cin >> k;
+    cout << k*2 << " minutos" << endl;
+}
